@@ -1,2 +1,2 @@
 # My_DNN
-implement dnn by python
+implement simple DNN by python
