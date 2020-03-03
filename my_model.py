@@ -105,11 +105,11 @@ class DNN():
             dx = da
         else:
             if self.activation=="sigmoid":
-                dx = self.sigmoid_derivative(self.activation_out)*da
+                dx = self.sigmoid_derivative(self.x)*da
             if self.activation=="relu":
-                dx = self.relu_derivative(self.activation_out)*da
+                dx = self.relu_derivative(self.x)*da
             if self.activation=="tanh":
-                dx = self.tanh_derivative(self.activation_out)*da
+                dx = self.tanh_derivative(self.x)*da
 
         nums = da.shape[1]
         #dw = dx/dw(已知等号前的w1,w2,,导数式子和等号右边的梯度值，便可求出dw) 
@@ -161,7 +161,7 @@ class Model(object):
             for bp in range(len(self.DNN_list)-1):
                 #print('bp ',bp)
                 a_prev = self.DNN_list[fp-1-bp].activation_out
-                self.DNN_list[len(self.DNN_list)-bp-1].backwardPropagation(da, a_prev)
+                da = self.DNN_list[len(self.DNN_list)-bp-1].backwardPropagation(da, a_prev)
             self.view_bar(i+1,epochs,loss)
         return loss_list
         
